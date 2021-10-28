@@ -2,6 +2,8 @@
 //THE TEST SERVER IS RUNNING ON LOCALHOST:3000//
 ////////////////////////////////////////////////
 
+
+
 // PROBLEM 1
 /*
     In the index.html file in this folder there is a button with an id of 'say-hello-button'!
@@ -11,17 +13,26 @@
 
 // CODE HERE
 
+let sayHelloButton = document.querySelector('#say-hello-button')
 
 // PROBLEM 2
 /*
-    Create a function that changes sayHelloButton's background color to black and its text color to white (you can use the .style object or create a CSS class and use classList.add)
+    Create a function that changes sayHelloButton's background color to black and its text 
+    color to white (you can use the .style object or create a CSS class and use classList.add)
     
     Attach a mouseover event to sayHelloButton that calls the function you wrote
 */
 
 // CODE HERE
 
+const coolBeans = (button) => {
+    button.style.backgroundColor = 'black'
+    button.style.color = 'white'
+}
 
+sayHelloButton.addEventListener('mouseenter', () => {
+coolBeans(sayHelloButton)
+})
 // PROBLEM 3
 /*
     Now you can see that the button colors change, but they do not change back when we take the mouse off of the button.
@@ -33,6 +44,14 @@
 
 // CODE HERE
 
+const taco = (button) => {
+    button.style.backgroundColor = 'white'
+    button.style.color = 'black'
+}
+
+sayHelloButton.addEventListener('mouseout', () => {
+taco(sayHelloButton)
+})
 
 // PROBLEM 4
 /*
@@ -54,6 +73,9 @@ const sayHello = () => {
 
 // CODE HERE
 
+sayHelloButton.addEventListener('click', () => {
+    sayHello(sayHelloButton)
+})
 
 // PROBLEM 5 
 /*
@@ -68,6 +90,11 @@ const sayHello = () => {
 
 const ohMy = () => {
     // YOUR CODE HERE
+    axios.get('http://localhost:3000/animals')
+
+    .then(res => {
+        console.log(res.data)
+    })
 }
 
 document.getElementById('animals-button').addEventListener('click', ohMy)
@@ -88,7 +115,15 @@ document.getElementById('animals-button').addEventListener('click', ohMy)
 
 const repeatMyParam = () => {
     //YOUR CODE HERE
+    axios.get(`http://localhost:3000/repeat/{SOMEPARAM}`)
+    .then(res => {
+        document.querySelector('#repeat-text').textContent = res.data
+        document.querySelector('#repeat-text').style.display = 'block'
+        console.log(res.data)
+    })
 }
+
+document.querySelector('#repeat-button').addEventListener('click', repeatMyParam)
 
 // PROBLEM 7
 /*
@@ -112,7 +147,14 @@ const repeatMyParam = () => {
 
 // CODE HERE
 
+const shweet = () => {
+    axios.get(`http://localhost:3000/query-test/?value=billy`)
+    .then(res => {
+        console.log(res.data)
+    })
+}
 
+document.querySelector('#query-button').addEventListener('click', shweet)
 
 ////////////////
 //INTERMEDIATE//
